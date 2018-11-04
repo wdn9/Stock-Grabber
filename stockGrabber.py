@@ -20,16 +20,47 @@ page = urllib.request.urlopen(url)
 # parse the html using beautiful soup and store in variable `soup`
 soup = BeautifulSoup(page, 'html.parser')
 
-
+'''
+print(soup.prettify())
+print()
+print()
+'''
 
 #grab the actual current market index
-marketIndex = soup.find_all('span',class_="Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)")
+marketIndexTag = soup.find('span',
+                           class_="Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)")
 
 
 # grab the amount of change in the current day
-dayChange = soup.find_all('span',class_="Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)")
+dayChangeTag = soup.find('span',
+                         class_="Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)")
+
+
+print(marketIndex.text)
+print()
+
+print(dayChange.text)
+print()
 
 
 
-print(marketIndex)
-print(dayChange)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
