@@ -36,12 +36,40 @@ dayChangeTag = soup.find('span',
                          class_="Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)")
 
 
-print(marketIndex.text)
+
+currentIndex = marketIndexTag.text
+
+#remove comma from current index number
+currentIndex = currentIndex.replace(',', '')
+
+#convert currentIndex to float
+currentIndex = float(currentIndex)
+print(currentIndex)
 print()
 
-print(dayChange.text)
+
+
+dayChangeText = dayChangeTag.text
+
+
+#seperate day change from day change percentage
+dayChangeList = dayChangeText.split()
+
+#strip '(',')' & '%' from percentage
+dayChangeList[1] = dayChangeList[1].replace(')', '')
+dayChangeList[1] = dayChangeList[1].replace('(', '')
+dayChangeList[1] = dayChangeList[1].replace('%', '')
+
+dayChange = float(dayChangeList[0])
+dayChangePercentage = float(dayChangeList[1])
+
+
+
+print(dayChange)
 print()
 
+print(dayChangePercentage)
+print()
 
 
 
