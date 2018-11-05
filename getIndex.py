@@ -88,12 +88,6 @@ print('Precentage Change:\t' + str(getDayChangePercentage()) + '%')
 '''
 
 
-'''
-while(True):
-'''
-    
-
-
 
 
 
