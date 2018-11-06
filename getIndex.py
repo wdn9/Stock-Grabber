@@ -8,7 +8,7 @@ Created on Wed Oct 31 10:31:14 2018
 # import libraries
 import urllib.request
 from bs4 import BeautifulSoup
-
+from time import sleep
 
 # this function reutrns the current index of the DOW Jones (according to cnn) as a float
 def getDOWIndex():
@@ -20,6 +20,11 @@ def getDOWIndex():
     # parse the html using beautiful soup and store in variable `soup`
     soup = BeautifulSoup(page, 'html.parser')
 
+    #close page so that next time the program runs it has to reopen the page and get new values (not sure if this works like this, just trying to solve problems)
+    page.close()
+    page = None 
+    url = ''
+    
     marketIndexTag = soup.find('span',stream='last_599362')
     
     #grab the actual current market index
@@ -47,6 +52,11 @@ def getDayChange():
     # parse the html using beautiful soup and store in variable `soup`
     soup = BeautifulSoup(page, 'html.parser')
     
+    #close page so that next time the program runs it has to reopen the page and get new values (not sure if this works like this, just trying to solve problems)
+    page.close()
+    page = None 
+    url = ''
+    
     # grab the amount of change in the current day
     dayChangeTag = soup.find('span',class_='posData')
     #if positive change isnt found, look for negitive one
@@ -66,7 +76,11 @@ def getDayChangePercentage():
     
     # parse the html using beautiful soup and store in variable `soup`
     soup = BeautifulSoup(page, 'html.parser')
-
+    
+    #close page so that next time the program runs it has to reopen the page and get new values (not sure if this works like this, just trying to solve problems)
+    page.close()
+    page = None 
+    url = ''
     # grab the amount of change in the current day
     dayChangeTag = soup.find_all('span',class_='posData')
     
@@ -81,13 +95,19 @@ def getDayChangePercentage():
 
     return float(dayChangeText)
 
-'''
-print('DOWIndex:\t\t' + str(getDOWIndex()))
-print('Current Day Channge:\t' + str(getDayChange()))
-print('Precentage Change:\t' + str(getDayChangePercentage()) + '%')
-'''
 
-
+current_time = 0
+# infinite loop shows how quickly this information can update
+while(True):
+    print(current_time)
+    print('DOWIndex:\t\t' + str(getDOWIndex()))
+    print('Current Day Channge:\t' + str(getDayChange()))
+    print('Precentage Change:\t' + str(getDayChangePercentage()) + '%')
+    print()
+    
+    current_time += 5
+    sleep(5)
+    
 
 
 
