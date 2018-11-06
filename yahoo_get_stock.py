@@ -13,8 +13,6 @@ from yahoo_fin import stock_info as si
 from time import sleep
 
 
-
-
 current_time = 0
 # infinite loop shows how quickly this information can update
 while(True):
@@ -24,6 +22,5 @@ while(True):
     
     current_time += 5
     sleep(5)
-
 
 
