@@ -19,7 +19,8 @@ def getDOWIndex():
     
     # parse the html using beautiful soup and store in variable `soup`
     soup = BeautifulSoup(page, 'html.parser')
-
+    
+    
     #close page so that next time the program runs it has to reopen the page and get new values (not sure if this works like this, just trying to solve problems)
     page.close()
     page = None 
@@ -41,7 +42,12 @@ def getDOWIndex():
     return currentIndex
 
 
-
+def stripCharsFromNumber(string):
+    string = string.replace(')', '')
+    string = string.replace('(', '')
+    string = string.replace('%', '')
+    string = string.replace('+', '')
+    return string
 
 def getDayChange():
     url = 'https://money.cnn.com/data/markets/dow/'
@@ -62,9 +68,9 @@ def getDayChange():
     #if positive change isnt found, look for negitive one
     if(dayChangeTag is None): 
         dayChangeTag = soup.find('span',class_='negData')
-    
     dayChangeText = dayChangeTag.text
     
+    dayChangeText = stripCharsFromNumber(dayChangeText)
     return float(dayChangeText)
 
     
@@ -79,8 +85,8 @@ def getDayChangePercentage():
     
     #close page so that next time the program runs it has to reopen the page and get new values (not sure if this works like this, just trying to solve problems)
     page.close()
-    page = None 
-    url = ''
+    #page = None 
+    #url = ''
     # grab the amount of change in the current day
     dayChangeTag = soup.find_all('span',class_='posData')
     
@@ -89,10 +95,7 @@ def getDayChangePercentage():
 
 
     #strip '(',')' & '%' from percentage
-    dayChangeText = dayChangeText.replace(')', '')
-    dayChangeText = dayChangeText.replace('(', '')
-    dayChangeText = dayChangeText.replace('%', '')
-
+    dayChangeText = stripCharsFromNumber(dayChangeText)
     return float(dayChangeText)
 
 
