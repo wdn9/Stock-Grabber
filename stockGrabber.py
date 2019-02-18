@@ -21,14 +21,14 @@ html = response.content
 soup = BeautifulSoup(html)
 
 # grab & print the current market index
-marketIndexTag = soup.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text.replace(',', '')
+marketIndexTag = soup.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text.encode('utf-8)'.replace(',', '')
 print(marketIndexTag)
 
 # grab the amount of change in the current day whether up or down, sanitize inputs to just '+float'
 if soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)'}) == None:
     dayChangeTag = soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataGreen)'}).text.encode('utf-8').replace('(', '').replace(')', '').replace('+', '').replace('%', '')
 else:
-    dayChangeTag = soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)'}).text.encode('utf-8').replace('(', '').replace(')', '').replace('+', '').replace('%', '')
+    dayChangeTag = soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)'}).text.encode('utf-8').replace('(', '').replace(')', '').replace('-', '').replace('%', '')
 
 #split day change from day change percentage, print list of strs
 dayChangeList = dayChangeTag.split(' ')
