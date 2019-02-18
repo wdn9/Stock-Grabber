@@ -10,7 +10,6 @@ also Caleb Kress did stuff
 import requests
 from BeautifulSoup import BeautifulSoup
 
-
 #URL of the webpage being scraped
 url = 'https://finance.yahoo.com/quote/%5EDJI/'
 
@@ -21,7 +20,7 @@ html = response.content
 # parse the html using beautiful soup and store in variable `soup`
 soup = BeautifulSoup(html)
 
-#grab the actual current market index
+# grab & print the current market index
 marketIndexTag = soup.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text.replace(',', '')
 print(marketIndexTag)
 
@@ -31,6 +30,6 @@ if soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)'}) == N
 else:
     dayChangeTag = soup.find('span', {'class': 'Trsdu(0.3s) Fw(500) Fz(14px) C($dataRed)'}).text.encode('utf-8').replace('(', '').replace(')', '').replace('+', '').replace('%', '')
 
-#split day change from day change percentage, return list of strs
+#split day change from day change percentage, print list of strs
 dayChangeList = dayChangeTag.split(' ')
 print(dayChangeList)
