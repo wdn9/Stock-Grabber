@@ -21,7 +21,7 @@ html = response.content
 soup = BeautifulSoup(html)
 
 # grab & print the current market index
-marketIndexTag = soup.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text.encode('utf-8)'.replace(',', '')
+marketIndexTag = soup.find('span', {'class': 'Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)'}).text.replace(',', '')
 print(marketIndexTag)
 
 # grab the amount of change in the current day whether up or down, sanitize inputs to just '+float'
